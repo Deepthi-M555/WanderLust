@@ -4,3 +4,5 @@
 # Files I do not want to track
 package-lock.json
 package.json 
+
+.env

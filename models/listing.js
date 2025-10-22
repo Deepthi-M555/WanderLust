@@ -9,9 +9,8 @@ const listingSchema = new Schema({
     },
     description: String,
     image: {
-        type: String,
-        default: "https://wallpaperaccess.com/full/1194086.jpg",   
-        set: (v) => v ===""? "https://wallpaperaccess.com/full/1194086.jpg": v,  
+        url: String,
+        filename: String    
     },
     price: Number,
     location: String,
