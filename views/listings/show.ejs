@@ -1,5 +1,5 @@
 <%- layout("layouts/boilerplate") -%>
-    <div class="row mt-3">
+  <div class="row mt-3">
     <div class="col-8 offset-3">
         <h3> <%= listing.title %> </h3>
     </div>
@@ -7,10 +7,10 @@
             <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
             <div class="card-body">
                 <p class="card-text"><i>Owned BY: <%= listing.owner.username %></i></p>
-                <p class="card-text"></p> <%= listing.description %> </p>
-                <p class="card-text"></p> ₹<%= listing.price.toLocaleString("en-IN") %></p>
-                <p class="card-text"></p> <%= listing.location %>  </p>
-                <p class="card-text"></p> <%= listing.country %> </p>
+                <p class="card-text"> <%= listing.description %> </p>
+                <p class="card-text"> ₹<%= listing.price.toLocaleString("en-IN") %></p>
+                <p class="card-text"> <%= listing.location %>  </p>
+                <p class="card-text"> <%= listing.country %> </p>
             </div>
         </div>
 
@@ -30,12 +30,12 @@
         <% } %>
 
         <div class="col-8 offset-3 mb-3">
-            <hr>
             <% if(currUser) {%>
+              <hr>
             <h4>Leave a Review</h4>
             <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation"> 
 
-               <div class="mb-3 mt-3">
+              <div class="mb-3 mt-3">
                 <label for="rating" class="form-label"> Rating</label>
                         <fieldset class="starability-slot">
                         <input 
@@ -82,7 +82,7 @@
                         />
                         <label for="first-rate5" title="Amazing">5 stars</label>
                 </fieldset>
-               </div>
+              </div>
                 <div class="mb-3 mt-3">
                  <label for="comment" class="form-label"> Comments</label>
                  <textarea 
@@ -100,8 +100,9 @@
             <hr>
             <% } %>
 
-            <p><b>All Reviews</b></p>
+            <% if(listing.reviews.length > 0) {%>
             <div class="row">
+              <p><b>All Reviews</b></p>
                 <% for(let review of listing.reviews){ %>
                     <div class="card col-5 ms-3 mb-3">
                         <div class="card-body mb-3">
@@ -115,5 +116,11 @@
                     </div>
                 <% } %>
             </div>
+            <% } %>
         </div>
-    </div>
+        <div class="col-8 offset-3 mb-3">
+              <h3>Where you'll be</h3>
+              <div id="map"></div>
+        </div>
+  </div>     
+  <script src="/js/map.js"></script>
