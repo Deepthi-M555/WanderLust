@@ -24,8 +24,22 @@ const listingSchema = new Schema({
     owner: {
         type: Schema.Types.ObjectId,
         ref: "User"
+    },
+     geometry: {
+        type: { 
+            type: String, 
+            enum: ['Point'], 
+            required: true 
+        },
+        coordinates: { 
+            type: [Number], 
+            required: true 
+        },
     }
 });
+
+listingSchema.index({ geometry: "2dsphere" });
+// Post middleware triggered after findByIdAndDelete on a listing; automatically removes associated reviews and performs any related cleanup to keep the database consistent
 
 listingSchema.post("findOneAndDelete", async (listing)=>{
     if(listing){
